@@ -49,8 +49,8 @@ sudo nano custom_config.inc.php
 buscamos estas lineas de codigo
 
 ahora que las encontramos las sustituiremos por esto:
-$tlCfg->log_path = 'var/www/html/testlink-code-1.9.16/logs/';
-$g_repositoryPath = 'var/www/html/testlink-code-1.9.16/upload_area/'
+$tlCfg->log_path = '/var/www/html/testlink-code-1.9.16/logs/';
+$g_repositoryPath = '/var/www/html/testlink-code-1.9.16/upload_area/';
 
 ahora hacemos ctrl + x
 luego presionamos la tecla s
