@@ -1,0 +1,87 @@
+- Descargar ondas de php necesarias xd -
+sudo wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo rpm -ivh epel-release-latest-7.noarch.rpm
+subscription-manager repos --enable rhel-7-server-optional-rpms
+
+- ahora hay que descargar php 5.6, Para esto: -
+sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+sudo yum install php56w
+
+- Luego algunos paquetes de php necesarios: -
+sudo yum install php56w-common php56w-gd php56w-xml php56w-mbstring php56w-mcrypt
+
+- Descargar apache -
+sudo yum install httpd
+
+- Instalar MariaDB -
+sudo yum install mariadb mariadb-server
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+sudo mysql_secure_installation
+
+daremos enter sin meter ninguna contraseña
+ahora ingresamos una nueva contraseña, que no se les olvide
+
+Instalar phpmyadmin
+sudo yum install phpmyadmin
+
+abriremos con usuario root y la contraseña que pusimos al instalar mariadb
+haremos un usuario para testlink, para usuario y contraseña pondre testlink
+
+- Desactivar SELinux -
+sudo nano /etc/selinux/config
+buscar la linea en donde dice SELINUX=enforcing
+y en lugar de eso poner SELINUX=disabled
+ctrl + x
+s
+enter
+sudo reboot
+
+Instalar TestLink
+sudo cd /home/NombreUsuario/Descargas/
+sudo wget https://github.com/TestLinkOpenSourceTRMS/testlink-code/archive/1.9.16.tar.gz
+sudo tar -zxvf 1.9.16.tar.gz -C /var/www/html
+sudo chown -R apache:apache /var/www/html/testlink-code-1.9.16
+cd /var/www/html/testlink-code-1.9.16
+cp custom_config.inc.php.example custom_config.inc.php
+sudo nano custom_config.inc.php
+
+buscamos estas lineas de codigo
+
+ahora que las encontramos las sustituiremos por esto:
+$tlCfg->log_path = 'var/www/html/testlink-code-1.9.16/logs/';
+$g_repositoryPath = 'var/www/html/testlink-code-1.9.16/upload_area/'
+
+ahora hacemos ctrl + x
+luego presionamos la tecla s
+ahora damos enter
+
+sudo systemctl start httpd mariadb
+sudo systemctl enable httpd mariadb
+
+abrir firefox y buscar localhost/testlink-code-1.9.16
+
+
+si les sale este error es porque no pueden haber 2 CURRENT_TIMESTAMP en una tabla
+por ende buscaremos las tablas que contengan 2 CURRENT_TIMESTAMP y
+modificaremos solo al que la linea de codigo dice datetime y en lugar
+de CURRENT_TIMESTAMP pondremos '2016-11-30 11:26:36'
+
+cd /var/www/html/testlink-code-1.9.16/install/sql/mysql/
+
+ ------buclesito xd ---------
+nano testlink_create_tables.sql
+
+hacemos ctrl + w 
+ingresamos el nombre de la tabla a modificar y damos enter
+
+
+una vez hayamos modificado presionamos ctrl + x
+presionamos la tecla s
+damos enter
+--------fin del buclesito--------
+
+repetiremos estos pasos para todas las tablas necesarias
+
+
+
