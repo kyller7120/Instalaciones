@@ -1,0 +1,41 @@
+___Instalacion Visual Studio Code___
+
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+sudo nano /etc/yum.repos.d/vscode.repo
+
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+
+sudo yum check-update
+
+sudo yum install code
+
+code
+
+__Creacion SSH KEY__
+ssh-keygen -t rsa -b 4096
+
+cat rutaArchivo.pub
+
+chmod 600 rutaArchivo
+
+ssh-add rutaArchivo
+
+
+__Usar Bazaar__
+bzr init
+
+bzr add
+
+bzr whoami "user@gmail.com"
+
+bzr commit -m "Descripcion cambios"
+
+bzr push lp:~user/nombreProyecto/rama
+
+
+
