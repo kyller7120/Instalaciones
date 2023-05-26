@@ -39,4 +39,14 @@ bzr commit -m "Descripcion cambios"
 bzr push lp:~user/nombreProyecto/rama
 
 
+__Herramientas para conexión a base de datos__
+sudo yum install mysql-devel
+
+sudo yum install gcc
+
+subscription-manager repos --enable=rhel-7-server-optional-rpms
+
+sudo yum install python3-devel
+
+pip install mysqlclient
 
