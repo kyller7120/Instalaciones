@@ -50,3 +50,6 @@ sudo yum install python3-devel
 
 pip install mysqlclient
 
+
+https://www.mediafire.com/file/3cmzc8c7orcnkof/Programacion_Grupo28.zip/file
+
